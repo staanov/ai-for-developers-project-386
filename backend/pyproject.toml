@@ -1,0 +1,38 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "Базовый backend на FastAPI"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi[standard]>=0.115.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+include = ["main.py"]
+
+[tool.fastapi]
+entrypoint = "main:app"
+
+[dependency-groups]
+dev = [
+    "mypy>=2.4.0",
+    "ruff>=0.17.2",
+]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+extend-exclude = [".venv", "dist"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+exclude = "^(\\.venv|dist)/"
